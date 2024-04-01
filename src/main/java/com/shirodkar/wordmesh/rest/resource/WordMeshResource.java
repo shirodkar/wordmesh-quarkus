@@ -40,7 +40,7 @@ public class WordMeshResource {
             return letter + "\nDONE.";
         }
         String nextLetter = word.substring(index, index+1);
-        return letter + "!!!\nGive me " + letter.toUpperCase() + "..." + getLetterClient(nextLetter).bounce(word, nextLetter, index+1);
+        return letter + "!!!\nGive me " + nextLetter.toUpperCase() + "..." + getLetterClient(nextLetter).bounce(word, nextLetter, index+1);
     }
 
     private LetterClient getLetterClient(String letter) {
