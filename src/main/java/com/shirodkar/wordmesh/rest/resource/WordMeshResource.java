@@ -1,10 +1,12 @@
 package com.shirodkar.wordmesh.rest.resource;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.shirodkar.wordmesh.rest.client.EndClient;
-import com.shirodkar.wordmesh.rest.client.LetterAClient;
-import com.shirodkar.wordmesh.rest.client.LetterBClient;
 import com.shirodkar.wordmesh.rest.client.LetterClient;
 
 import jakarta.ws.rs.Consumes;
@@ -18,19 +20,13 @@ import jakarta.ws.rs.core.MediaType;
 public class WordMeshResource {
 
     @RestClient
-    LetterAClient letterAClient;
-
-    @RestClient
-    LetterBClient letterBClient;
-
-    @RestClient
     EndClient endClient;
 
     @GET
     @Path("start/word/{word}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public String start(@PathParam("word") String word) {
+    public String start(@PathParam("word") String word) throws URISyntaxException {
         String firstLetter = word.substring(0, 1);
         return "The word -" + word + "- is traversing the mesh...\nGive me " + firstLetter + "..." + getLetterClient(firstLetter).bounce(word, firstLetter, 1);
     }
@@ -39,11 +35,12 @@ public class WordMeshResource {
     @Path("/bounce/word/{word}/letter/{letter}/index/{index}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public String bounce(@PathParam("word") String word, @PathParam("letter") String letter, @PathParam("index") int index) {
+    public String bounce(@PathParam("word") String word, @PathParam("letter") String letter, @PathParam("index") int index) throws URISyntaxException {
         if(word.length() == index) {
             return letter + endClient.end(word);
         }
         String nextLetter = word.substring(index, index+1);
+        
         return letter + "!!!\nGive me " + nextLetter.toUpperCase() + "..." + getLetterClient(nextLetter).bounce(word, nextLetter, index+1);
     }
 
@@ -55,15 +52,9 @@ public class WordMeshResource {
         return "\n" + word.toUpperCase() + " " + word.toUpperCase() + " " + word.toUpperCase() + " " + word.toUpperCase() + "!!!";
     }
 
-    private LetterClient getLetterClient(String letter) {
-        switch (letter) {
-            case "A":
-                return letterAClient;    
-            case "B":
-                return letterBClient;    
-            default:
-                return letterAClient;        
-        }
+    private LetterClient getLetterClient(String letter) throws URISyntaxException {
+        URI apiUri = new URI("http://letter-" + letter + ":8080");
+        return RestClientBuilder.newBuilder().baseUri(apiUri).build(LetterClient.class);
     }
 
 }
