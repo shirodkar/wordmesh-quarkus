@@ -3,6 +3,7 @@ package com.shirodkar.wordmesh.rest.resource;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import com.shirodkar.wordmesh.rest.client.LetterAClient;
+import com.shirodkar.wordmesh.rest.client.LetterBClient;
 import com.shirodkar.wordmesh.rest.client.LetterClient;
 
 import jakarta.ws.rs.Consumes;
@@ -17,6 +18,9 @@ public class WordMeshResource {
 
     @RestClient
     LetterAClient letterAClient;
+
+    @RestClient
+    LetterBClient letterBClient;
 
     @GET
     @Path("/word/{word}")
@@ -40,7 +44,14 @@ public class WordMeshResource {
     }
 
     private LetterClient getLetterClient(String letter) {
-        return letterAClient;
+        switch (letter) {
+            case "A":
+                return letterAClient;    
+            case "B":
+                return letterBClient;    
+            default:
+                return letterAClient;        
+        }
     }
 
 }
