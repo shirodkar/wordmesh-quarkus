@@ -2,6 +2,7 @@ package com.shirodkar.wordmesh.rest.resource;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import com.shirodkar.wordmesh.rest.client.EndClient;
 import com.shirodkar.wordmesh.rest.client.LetterAClient;
 import com.shirodkar.wordmesh.rest.client.LetterBClient;
 import com.shirodkar.wordmesh.rest.client.LetterClient;
@@ -22,8 +23,11 @@ public class WordMeshResource {
     @RestClient
     LetterBClient letterBClient;
 
+    @RestClient
+    EndClient endClient;
+
     @GET
-    @Path("/word/{word}")
+    @Path("start/word/{word}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
     public String start(@PathParam("word") String word) {
@@ -37,10 +41,18 @@ public class WordMeshResource {
     @Consumes(MediaType.TEXT_PLAIN)
     public String bounce(@PathParam("word") String word, @PathParam("letter") String letter, @PathParam("index") int index) {
         if(word.length() == index) {
-            return letter + "\nDONE.";
+            return letter + endClient.end(word);
         }
         String nextLetter = word.substring(index, index+1);
         return letter + "!!!\nGive me " + nextLetter.toUpperCase() + "..." + getLetterClient(nextLetter).bounce(word, nextLetter, index+1);
+    }
+
+    @GET
+    @Path("end/word/{word}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String end(@PathParam("word") String word) {
+        return "\n" + word.toUpperCase() + " " + word.toUpperCase() + " " + word.toUpperCase() + " " + word.toUpperCase() + "!!!";
     }
 
     private LetterClient getLetterClient(String letter) {
