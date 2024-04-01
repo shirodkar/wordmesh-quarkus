@@ -37,7 +37,7 @@ public class WordMeshResource {
     @Consumes(MediaType.TEXT_PLAIN)
     public String bounce(@PathParam("word") String word, @PathParam("letter") String letter, @PathParam("index") int index) throws URISyntaxException {
         if(word.length() == index) {
-            return letter + endClient.end(word);
+            return letter + "!!!" + endClient.end(word);
         }
         String nextLetter = word.substring(index, index+1);
         
