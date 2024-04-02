@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: wordmesh
+  labels:
+    app: wordmesh
+    sidecar.istio.io/inject: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordmesh
+  template:
+    metadata:
+      labels:
+        app: wordmesh
+        deployment: wordmesh
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: wordmesh
+          image: 'image-registry.openshift-image-registry.svc:5000/demo/wordmesh@sha256:f91e631c3cc97d6a2b0977e861f67d417117eabe15651c81ceb64f5bc6232fdd'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
