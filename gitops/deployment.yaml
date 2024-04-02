@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: wordmesh
-          image: 'image-registry.openshift-image-registry.svc:5000/demo/wordmesh@sha256:f91e631c3cc97d6a2b0977e861f67d417117eabe15651c81ceb64f5bc6232fdd'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
           ports:
             - containerPort: 8080
               protocol: TCP
