@@ -1,0 +1,159 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: start
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: start
+  template:
+    metadata:
+      labels:
+        app: start
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: start
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          envFrom:
+            - configMapRef:
+                name: wordmesh-config
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: end
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: end
+  template:
+    metadata:
+      labels:
+        app: end
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: end
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          envFrom:
+            - configMapRef:
+                name: wordmesh-config
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: letter-a
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: letter-a
+  template:
+    metadata:
+      labels:
+        app: letter-a
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: letter-a
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          envFrom:
+            - configMapRef:
+                name: wordmesh-config
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: letter-b
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: letter-b
+  template:
+    metadata:
+      labels:
+        app: letter-b
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: letter-b
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          envFrom:
+            - configMapRef:
+                name: wordmesh-config
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: letter-c
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: letter-c
+  template:
+    metadata:
+      labels:
+        app: letter-c
+      annotations:
+        sidecar.istio.io/inject: 'true'
+    spec:
+      containers:
+        - name: letter-c
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          envFrom:
+            - configMapRef:
+                name: wordmesh-config
