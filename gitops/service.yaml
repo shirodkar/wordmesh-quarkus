@@ -2,25 +2,14 @@ kind: Service
 apiVersion: v1
 metadata:
   name: wordmesh
-  labels:
-    app: wordmesh
+  annotations:
     sidecar.istio.io/inject: 'true'
 spec:
-  ipFamilies:
-    - IPv4
   ports:
     - name: 8080-tcp
       protocol: TCP
       port: 8080
       targetPort: 8080
-    - name: 8443-tcp
-      protocol: TCP
-      port: 8443
-      targetPort: 8443
-  internalTrafficPolicy: Cluster
   type: ClusterIP
-  ipFamilyPolicy: SingleStack
-  sessionAffinity: None
   selector:
     app: wordmesh
-    deployment: wordmesh

@@ -2,8 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: wordmesh
-  labels:
-    app: wordmesh
+  annotations:
     sidecar.istio.io/inject: 'true'
 spec:
   replicas: 1
@@ -14,7 +13,7 @@ spec:
     metadata:
       labels:
         app: wordmesh
-        deployment: wordmesh
+      annotations:
         sidecar.istio.io/inject: 'true'
     spec:
       containers:
