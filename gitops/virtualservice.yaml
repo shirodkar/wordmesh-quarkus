@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: wordmesh-vs
+spec:
+  gateways:
+    - wordmesh-gateway
+  hosts:
+    - '*'
+  http:
+    - match:
+        - uri:
+            prefix: /wordmesh/start/
+      route:
+        - destination:
+            host: start
+            port:
+              number: 8080

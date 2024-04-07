@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: wordmesh
+  name: start
   annotations:
     sidecar.istio.io/inject: 'true'
 spec:
@@ -12,4 +12,68 @@ spec:
       targetPort: 8080
   type: ClusterIP
   selector:
-    app: wordmesh
+    app: start
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: end
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  selector:
+    app: end
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: letter-a
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  selector:
+    app: letter-a
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: letter-b
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  selector:
+    app: letter-b
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: letter-c
+  annotations:
+    sidecar.istio.io/inject: 'true'
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  selector:
+    app: letter-c
