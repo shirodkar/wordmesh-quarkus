@@ -3,6 +3,7 @@ package com.shirodkar.wordmesh.rest.resource;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -22,13 +23,17 @@ public class WordMeshResource {
     @RestClient
     EndClient endClient;
 
+    @ConfigProperty(name = "letterCase", defaultValue = "upper")
+    String letterCase;
+
     @GET
     @Path("start/word/{word}")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
     public String start(@PathParam("word") String word) throws URISyntaxException {
+        word = setCase(word);
         String firstLetter = word.substring(0, 1);
-        return "The word -" + word + "- is traversing the mesh...\nGive me " + firstLetter.toUpperCase() + "..." + getLetterClient(firstLetter).bounce(word, firstLetter, 1);
+        return "The word -" + word + "- is traversing the mesh...\nGive me " + firstLetter + "..." + getLetterClient(firstLetter).bounce(word, firstLetter, 1);
     }
 
     @GET
@@ -41,7 +46,7 @@ public class WordMeshResource {
         }
         String nextLetter = word.substring(index, index+1);
         
-        return letter.toUpperCase() + "!!!\nGive me " + nextLetter.toUpperCase() + "..." + getLetterClient(nextLetter).bounce(word, nextLetter, index+1);
+        return letter + "!!!\nGive me " + nextLetter + "..." + getLetterClient(nextLetter).bounce(word, nextLetter, index+1);
     }
 
     @GET
@@ -49,7 +54,7 @@ public class WordMeshResource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
     public String end(@PathParam("word") String word) {
-        return "\n" + word.toUpperCase() + " " + word.toUpperCase() + " " + word.toUpperCase() + " " + word.toUpperCase() + "!!!";
+        return "\n" + word + " " + word + " " + word + " " + word + "!!!";
     }
 
     private LetterClient getLetterClient(String letter) throws URISyntaxException {
@@ -57,4 +62,7 @@ public class WordMeshResource {
         return RestClientBuilder.newBuilder().baseUri(apiUri).build(LetterClient.class);
     }
 
+    private String setCase(String word) {
+        return ("upper".equals(letterCase)) ?  word.toUpperCase() : word.toLowerCase();
+    }
 }
