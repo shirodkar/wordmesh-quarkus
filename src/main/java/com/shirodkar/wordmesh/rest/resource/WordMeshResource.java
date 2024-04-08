@@ -29,10 +29,9 @@ public class WordMeshResource {
 
     @GET
     @Path("start/word/{word}")
-    @QueryParam("letterCaseParam")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public String start(@PathParam("word") String word, String letterCaseParam) throws URISyntaxException {
+    public String start(@PathParam("word") String word, @QueryParam("letterCaseParam") String letterCaseParam) throws URISyntaxException {
         if(letterCaseParam != null) {
             this.letterCase = letterCaseParam;
         }
