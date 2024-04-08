@@ -16,3 +16,5 @@ spec:
             host: start
             port:
               number: 8080
+            subset: v1
+          weight: 100

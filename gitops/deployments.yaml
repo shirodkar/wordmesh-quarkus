@@ -1,5 +1,5 @@
 kind: Deployment
-apiVersion: apps/v1
+apiVersion: apps/v2
 metadata:
   name: start
   annotations:
@@ -13,13 +13,13 @@ spec:
     metadata:
       labels:
         app: start
-        version: v1
+        version: v2
       annotations:
         sidecar.istio.io/inject: 'true'
     spec:
       containers:
         - name: start
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -32,7 +32,7 @@ spec:
                 name: wordmesh-config
 ---
 kind: Deployment
-apiVersion: apps/v1
+apiVersion: apps/v2
 metadata:
   name: end
   annotations:
@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
         - name: end
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -64,7 +64,7 @@ spec:
                 name: wordmesh-config
 ---
 kind: Deployment
-apiVersion: apps/v1
+apiVersion: apps/v2
 metadata:
   name: letter-a
   annotations:
@@ -83,7 +83,7 @@ spec:
     spec:
       containers:
         - name: letter-a
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -96,7 +96,7 @@ spec:
                 name: wordmesh-config
 ---
 kind: Deployment
-apiVersion: apps/v1
+apiVersion: apps/v2
 metadata:
   name: letter-b
   annotations:
@@ -115,7 +115,7 @@ spec:
     spec:
       containers:
         - name: letter-b
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -128,7 +128,7 @@ spec:
                 name: wordmesh-config
 ---
 kind: Deployment
-apiVersion: apps/v1
+apiVersion: apps/v2
 metadata:
   name: letter-c
   annotations:
@@ -147,7 +147,7 @@ spec:
     spec:
       containers:
         - name: letter-c
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP

@@ -15,6 +15,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("")
@@ -28,9 +29,13 @@ public class WordMeshResource {
 
     @GET
     @Path("start/word/{word}")
+    @QueryParam("letterCaseParam")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.TEXT_PLAIN)
-    public String start(@PathParam("word") String word) throws URISyntaxException {
+    public String start(@PathParam("word") String word, String letterCaseParam) throws URISyntaxException {
+        if(letterCaseParam != null) {
+            this.letterCase = letterCaseParam;
+        }
         word = setCase(word);
         String firstLetter = word.substring(0, 1);
         return "The word -" + word + "- is traversing the mesh...\nGive me " + firstLetter + "..." + getLetterClient(firstLetter).bounce(word, firstLetter, 1);
