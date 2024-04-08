@@ -7,8 +7,6 @@ spec:
     to:
       kind: DockerImage
       name: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
-    pushSecret:
-      name: quayio
   strategy:
     type: Source
     sourceStrategy:
