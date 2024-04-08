@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: start
+        version: v1
       annotations:
         sidecar.istio.io/inject: 'true'
     spec:
