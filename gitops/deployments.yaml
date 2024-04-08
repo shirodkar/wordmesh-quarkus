@@ -34,39 +34,6 @@ spec:
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: start
-  annotations:
-    sidecar.istio.io/inject: 'true'
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: start
-  template:
-    metadata:
-      labels:
-        app: start
-        version: v2
-      annotations:
-        sidecar.istio.io/inject: 'true'
-    spec:
-      containers:
-        - name: start
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
-          ports:
-            - containerPort: 8080
-              protocol: TCP
-          resources:
-            limits:
-              cpu: 500m
-              memory: 128Mi
-          envFrom:
-            - configMapRef:
-                name: wordmesh-config
----
-kind: Deployment
-apiVersion: apps/v1
-metadata:
   name: end
   annotations:
     sidecar.istio.io/inject: 'true'
