@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: start
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
         - name: end
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -83,7 +83,7 @@ spec:
     spec:
       containers:
         - name: letter-a
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -115,7 +115,7 @@ spec:
     spec:
       containers:
         - name: letter-b
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -147,7 +147,7 @@ spec:
     spec:
       containers:
         - name: letter-c
-          image: 'quay.io/rh_ee_sshirodk/wordmesh:v1'
+          image: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
           ports:
             - containerPort: 8080
               protocol: TCP
