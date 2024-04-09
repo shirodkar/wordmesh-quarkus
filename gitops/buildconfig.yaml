@@ -22,3 +22,28 @@ spec:
       uri: 'https://github.com/shirodkar/wordmesh-quarkus.git'
       ref: v1
     contextDir: /
+---
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: wordmesh-quarkus-git
+spec:
+  output:
+    to:
+      kind: DockerImage
+      name: 'quay.io/rh_ee_sshirodk/wordmesh:v2'
+    pushSecret:
+      name: quayio
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'java:openjdk-17-ubi8'
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/shirodkar/wordmesh-quarkus.git'
+      ref: v2
+    contextDir: /
