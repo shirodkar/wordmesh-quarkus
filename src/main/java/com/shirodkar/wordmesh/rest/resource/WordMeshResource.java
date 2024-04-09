@@ -27,6 +27,9 @@ public class WordMeshResource {
     @ConfigProperty(name = "letterCase", defaultValue = "upper")
     String letterCase;
 
+    @ConfigProperty(name = "dots", defaultValue = "...")
+    String dots;
+
     @GET
     @Path("start/word/{word}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -37,7 +40,7 @@ public class WordMeshResource {
         }
         word = setCase(word);
         String firstLetter = word.substring(0, 1);
-        return "The word -" + word + "- is traversing the mesh...\nGive me " + firstLetter + "..." + getLetterClient(firstLetter).bounce(word, firstLetter, 1);
+        return "The word -" + word + "- is traversing the mesh...\nGive me " + firstLetter + dots + getLetterClient(firstLetter).bounce(word, firstLetter, 1);
     }
 
     @GET
@@ -50,7 +53,7 @@ public class WordMeshResource {
         }
         String nextLetter = word.substring(index, index+1);
         
-        return letter + "!!!\nGive me " + nextLetter + "..." + getLetterClient(nextLetter).bounce(word, nextLetter, index+1);
+        return letter + "!!!\nGive me " + nextLetter + dots + getLetterClient(nextLetter).bounce(word, nextLetter, index+1);
     }
 
     @GET
