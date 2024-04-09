@@ -20,4 +20,5 @@ spec:
     type: Git
     git:
       uri: 'https://github.com/shirodkar/wordmesh-quarkus.git'
+      ref: v1
     contextDir: /
