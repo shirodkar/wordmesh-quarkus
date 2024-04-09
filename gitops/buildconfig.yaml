@@ -1,7 +1,7 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: wordmesh-quarkus-git
+  name: wordmesh-quarkus-git-v1
 spec:
   output:
     to:
@@ -26,7 +26,7 @@ spec:
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: wordmesh-quarkus-git
+  name: wordmesh-quarkus-git-v2
 spec:
   output:
     to:
