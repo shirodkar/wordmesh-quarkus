@@ -4,6 +4,7 @@ metadata:
   name: start
   annotations:
     sidecar.istio.io/inject: 'true'
+    configmap.reloader.stakater.com/reload: "wordmesh-config"
 spec:
   replicas: 1
   selector:
@@ -37,6 +38,7 @@ metadata:
   name: end
   annotations:
     sidecar.istio.io/inject: 'true'
+    configmap.reloader.stakater.com/reload: "wordmesh-config"
 spec:
   replicas: 1
   selector:
@@ -69,6 +71,7 @@ metadata:
   name: letter-a
   annotations:
     sidecar.istio.io/inject: 'true'
+    configmap.reloader.stakater.com/reload: "wordmesh-config"
 spec:
   replicas: 1
   selector:
@@ -101,6 +104,7 @@ metadata:
   name: letter-b
   annotations:
     sidecar.istio.io/inject: 'true'
+    configmap.reloader.stakater.com/reload: "wordmesh-config"
 spec:
   replicas: 1
   selector:
@@ -133,6 +137,7 @@ metadata:
   name: letter-c
   annotations:
     sidecar.istio.io/inject: 'true'
+    configmap.reloader.stakater.com/reload: "wordmesh-config"
 spec:
   replicas: 1
   selector:
